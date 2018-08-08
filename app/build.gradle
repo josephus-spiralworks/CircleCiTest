@@ -14,10 +14,20 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        Keys {
+            keyAlias 'gameplay'
+            storeFile file('../key.keystore')
+            keyPassword '&$%gameplay#^%'
+            storePassword '&^%gameplay)(*'
+        }
+    }
     buildTypes {
         release {
-            minifyEnabled false
+            shrinkResources true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.Keys
         }
     }
 }
