@@ -5,39 +5,46 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
-    defaultConfig {
-        applicationId "com.josephus.circlecitest"
-        minSdkVersion 16
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+  compileSdkVersion 28
+  defaultConfig {
+    applicationId "com.josephus.circlecitest"
+    minSdkVersion 16
+    targetSdkVersion 28
+    versionCode 1
+    versionName "1.0"
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+  }
+  signingConfigs {
+    Keys {
+      keyAlias 'gameplay'
+      storeFile file('../key.keystore')
+      keyPassword '&$%gameplay#^%'
+      storePassword '&^%gameplay)(*'
     }
-    signingConfigs {
-        Keys {
-            keyAlias 'gameplay'
-            storeFile file('../key.keystore')
-            keyPassword '&$%gameplay#^%'
-            storePassword '&^%gameplay)(*'
-        }
+  }
+  buildTypes {
+    release {
+      shrinkResources true
+      minifyEnabled true
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      signingConfig signingConfigs.Keys
     }
-    buildTypes {
-        release {
-            shrinkResources true
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.Keys
-        }
+  }
+  flavorDimensions "default"
+  productFlavors {
+    staging {
+      dimension "default"
+      applicationId "com.josephus.circlecitest.staging"
     }
+  }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+  implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
+  implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
+  testImplementation 'junit:junit:4.12'
+  androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
+  androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
 }
